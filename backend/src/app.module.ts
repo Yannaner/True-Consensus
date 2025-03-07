@@ -6,6 +6,7 @@ import { UsersModule } from './users/users.module';
 import { VotingListModule } from './voting_list/voting_list.module';
 import { VotingElementsModule } from './voting_elements/voting_elements.module';
 import { CurrentVotesModule } from './current_votes/current_votes.module';
+import { ConsensusVoteModule } from './consensus_vote/consensus_vote.module';
 
 @Module({
   imports: [
@@ -23,6 +24,7 @@ import { CurrentVotesModule } from './current_votes/current_votes.module';
     VotingListModule,
     VotingElementsModule,
     CurrentVotesModule,
+    ConsensusVoteModule,
   ],
   controllers: [AppController],
   providers: [AppService],
