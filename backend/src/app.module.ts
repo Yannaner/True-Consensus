@@ -4,6 +4,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UsersModule } from './users/users.module';
 import { VotingListModule } from './voting_list/voting_list.module';
+import { VotingElementsModule } from './voting_elements/voting_elements.module';
 
 @Module({
   imports: [
@@ -19,6 +20,7 @@ import { VotingListModule } from './voting_list/voting_list.module';
     }),
     UsersModule,
     VotingListModule,
+    VotingElementsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
