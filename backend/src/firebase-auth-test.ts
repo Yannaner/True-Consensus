@@ -25,23 +25,25 @@ admin.initializeApp({
 
 async function testFirebaseAuth() {
   try {
-    // Sign up a new user
     const email = 'turtle@example.com';
     const password = 'password123';
     const userCredential = await createUserWithEmailAndPassword(auth, email, password);
     console.log('User created:', userCredential.user);
 
-    // Log in with the new user
     const loginCredential = await signInWithEmailAndPassword(auth, email, password);
     console.log('User logged in:', loginCredential.user);
 
-    // Get the ID token
-    const idToken = await loginCredential.user.getIdToken();
-    console.log('ID Token:', idToken);
 
-    // Verify the token using Firebase Admin SDK
+//< ------------------------------------------------------------ >
+    // Display the access token
+    const idToken = await loginCredential.user.getIdToken();
+    console.log('ID Token:', idToken); 
+
+
+    // Display the UID
     const decodedToken = await admin.auth().verifyIdToken(idToken);
-    console.log('Decoded Token UID:', decodedToken.uid);
+    console.log('Decoded Token UID:', decodedToken.uid); 
+//< ------------------------------------------------------------ >
 
   } catch (error) {
     console.error('Error:', error);
