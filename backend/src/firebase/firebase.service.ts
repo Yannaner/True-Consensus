@@ -1,4 +1,3 @@
-// filepath: c:\Users\2005f\Desktop\VScode\TrueConsensus\backend\src\firebase\firebase.service.ts
 import { Injectable } from '@nestjs/common';
 import { initializeApp } from 'firebase/app';
 import { getAuth } from 'firebase/auth';

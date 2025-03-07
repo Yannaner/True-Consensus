@@ -4,6 +4,9 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { AuthController } from './auth/auth.controller';
 import { AppService } from './app.service';
 import { UsersModule } from './users/users.module';
+import { FirebaseModule } from './firebase/firebase.module';
+import { FirebaseAdminService } from './firebase/firebase-admin.service';
+import { FirebaseAuthGuard } from './auth/firebase-auth.guard';
 
 @Module({
   imports: [
@@ -18,8 +21,9 @@ import { UsersModule } from './users/users.module';
       synchronize: true, // Set to false in production
     }),
     UsersModule,
+    FirebaseModule,
   ],
   controllers: [AuthController],
-  providers: [AppService],
+  providers: [AppService, FirebaseAdminService, FirebaseAuthGuard],
 })
 export class AppModule {}

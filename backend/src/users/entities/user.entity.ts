@@ -1,9 +1,10 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, PrimaryColumn } from 'typeorm';
 
 @Entity('users')
 export class User {
-  @PrimaryGeneratedColumn()
-  user_id: number;
+  //change from generate to assignment
+  @PrimaryColumn()
+  user_id: string;
 
   @Column({ length: 100 })
   first_name: string;
