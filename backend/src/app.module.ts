@@ -5,6 +5,7 @@ import { AppService } from './app.service';
 import { UsersModule } from './users/users.module';
 import { VotingListModule } from './voting_list/voting_list.module';
 import { VotingElementsModule } from './voting_elements/voting_elements.module';
+import { CurrentVotesModule } from './current_votes/current_votes.module';
 
 @Module({
   imports: [
@@ -21,6 +22,7 @@ import { VotingElementsModule } from './voting_elements/voting_elements.module';
     UsersModule,
     VotingListModule,
     VotingElementsModule,
+    CurrentVotesModule,
   ],
   controllers: [AppController],
   providers: [AppService],
