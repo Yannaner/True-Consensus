@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable, NotFoundException, ConflictException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CreateCurrentVoteDto } from './dto/create-current_vote.dto';
@@ -13,6 +13,18 @@ export class CurrentVotesService {
   ) {}
 
   async create(createCurrentVoteDto: CreateCurrentVoteDto): Promise<CurrentVote> {
+    // Check if the user already voted on this voting list
+    const existingVote = await this.currentVoteRepository.findOne({
+      where: {
+        userId: createCurrentVoteDto.user_id,
+        votingId: createCurrentVoteDto.voting_id
+      }
+    });
+
+    if (existingVote) {
+      throw new ConflictException(`User ${existingVote.userId} has already voted on voting list ${existingVote.votingId}`);
+    }
+    
     const newVote = this.currentVoteRepository.create(createCurrentVoteDto);
     return this.currentVoteRepository.save(newVote);
   }
