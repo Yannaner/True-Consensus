@@ -8,4 +8,8 @@ export class CreateConsensusVoteDto {
   @IsOptional()
   @IsString()
   calculatedConsensus?: string;
+
+  @IsOptional()
+  @IsString()
+  formattedConsensus?: string;
 }

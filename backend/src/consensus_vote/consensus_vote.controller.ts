@@ -2,10 +2,14 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { ConsensusVoteService } from './consensus_vote.service';
 import { CreateConsensusVoteDto } from './dto/create-consensus_vote.dto';
 import { UpdateConsensusVoteDto } from './dto/update-consensus_vote.dto';
+import { VotingElementsService } from '../voting_elements/voting_elements.service';
 
 @Controller('consensus-vote')
 export class ConsensusVoteController {
-  constructor(private readonly consensusVoteService: ConsensusVoteService) {}
+  constructor(
+    private readonly consensusVoteService: ConsensusVoteService,
+    private readonly votingElementsService: VotingElementsService
+  ) {}
 
   @Post()
   create(@Body() createConsensusVoteDto: CreateConsensusVoteDto) {
@@ -20,6 +24,11 @@ export class ConsensusVoteController {
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.consensusVoteService.findOne(+id);
+  }
+
+  @Get('voting-elements/:votingId')
+  async getVotingElements(@Param('votingId') votingId: string) {
+    return this.votingElementsService.findByVotingId(+votingId);
   }
 
   @Patch(':id')
