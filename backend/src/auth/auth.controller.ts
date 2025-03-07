@@ -1,5 +1,5 @@
 import { Controller, Post, Body } from '@nestjs/common';
-import { FirebaseService } from './firebase/firebase.service';
+import { FirebaseService } from '../firebase/firebase.service';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
 
 @Controller('auth')
