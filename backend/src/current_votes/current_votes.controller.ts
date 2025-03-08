@@ -21,7 +21,7 @@ export class CurrentVotesController {
 
   @Get(':id')
   findOne(@Param('id') id: number) {
-    return this.currentVotesService.findOne(+id);
+    return this.currentVotesService.findByVotingId(+id);
   }
 
   @Patch(':id')

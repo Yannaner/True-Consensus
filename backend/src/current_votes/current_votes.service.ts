@@ -54,9 +54,9 @@ export class CurrentVotesService {
     return vote;
   }
 
-  async findByVotingId(votingId: string): Promise<CurrentVote[]> {
+  async findByVotingId(votingId: number): Promise<CurrentVote[]> {
     return this.currentVoteRepository.find({
-      where: { votingId: parseInt(votingId) },
+      where: { votingId },
       relations: ['user']
     });
   }
