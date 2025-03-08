@@ -1,15 +1,17 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards, Req } from '@nestjs/common';
 import { CurrentVotesService } from './current_votes.service';
 import { CreateCurrentVoteDto } from './dto/create-current_vote.dto';
 import { UpdateCurrentVoteDto } from './dto/update-current_vote.dto';
+import { FirebaseAuthGuard } from 'src/auth/firebase-auth.guard';
 
 @Controller('current-votes')
 export class CurrentVotesController {
   constructor(private readonly currentVotesService: CurrentVotesService) {}
 
   @Post()
-  create(@Body() createCurrentVoteDto: CreateCurrentVoteDto) {
-    return this.currentVotesService.create(createCurrentVoteDto);
+  @UseGuards(FirebaseAuthGuard)
+  create(@Req() req, @Body() createCurrentVoteDto: CreateCurrentVoteDto) {
+    return this.currentVotesService.create(createCurrentVoteDto, req.user.uid);
   }
 
   @Get()
@@ -18,7 +20,7 @@ export class CurrentVotesController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
+  findOne(@Param('id') id: number) {
     return this.currentVotesService.findOne(+id);
   }
 

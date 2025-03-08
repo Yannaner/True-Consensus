@@ -12,11 +12,11 @@ export class CurrentVotesService {
     private currentVoteRepository: Repository<CurrentVote>,
   ) {}
 
-  async create(createCurrentVoteDto: CreateCurrentVoteDto): Promise<CurrentVote> {
+  async create(createCurrentVoteDto: CreateCurrentVoteDto, user_id: string): Promise<CurrentVote> {
     // Check if the user already voted on this voting list
     const existingVote = await this.currentVoteRepository.findOne({
       where: {
-        userId: createCurrentVoteDto.user_id,
+        userId: user_id,
         votingId: createCurrentVoteDto.voting_id
       }
     });
@@ -28,7 +28,10 @@ export class CurrentVotesService {
     }
     
     // Create a new vote if one doesn't exist
-    const newVote = this.currentVoteRepository.create(createCurrentVoteDto);
+    const newVote = this.currentVoteRepository.create({
+      ...createCurrentVoteDto,
+      userId: user_id  // Set the userId explicitly
+    });
     return this.currentVoteRepository.save(newVote);
   }
 
@@ -51,14 +54,14 @@ export class CurrentVotesService {
     return vote;
   }
 
-  async findByVotingId(votingId: number): Promise<CurrentVote[]> {
+  async findByVotingId(votingId: string): Promise<CurrentVote[]> {
     return this.currentVoteRepository.find({
-      where: { votingId },
+      where: { votingId: parseInt(votingId) },
       relations: ['user']
     });
   }
 
-  async findByUserId(userId: number): Promise<CurrentVote[]> {
+  async findByUserId(userId: string): Promise<CurrentVote[]> {
     return this.currentVoteRepository.find({
       where: { userId },
       relations: ['votingList']
