@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Condorcet Voting Demo</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+      }
+      .votes-list {
+        list-style-type: none;
+        padding: 0;
+      }
+      .votes-list li {
+        margin: 5px 0;
+      }
+      input[type="text"] {
+        width: 200px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Condorcet Voting (Ranked Pairs) Demo</h1>
+
+    <p>Default candidates (by index): 0=A, 1=B, 2=C, 3=D.</p>
+    <p>Enter your vote as a comma-separated list of indices in ranked order.</p>
+    <p>Example: "0,1,2,3" means A > B > C > D (A is top choice).</p>
+
+    <div>
+      <label for="voteInput">New vote:</label>
+      <input type="text" id="voteInput" placeholder="e.g. 1,0,2,3" />
+      <button onclick="addVote()">Add Vote</button>
+    </div>
+
+    <h3>Votes so far:</h3>
+    <ul id="votesList" class="votes-list"></ul>
+
+    <button onclick="clearVotes()">Clear All Votes</button>
+
+    <h3>Current Ranking Result:</h3>
+    <div id="results">No votes yet.</div>
+
+    <!-- Load the Condorcet code (must expose runCondorcet() globally) -->
+    <script src="../condorcet.js"></script>
+
+    <script>
+      // Example candidates in the same order as in condorcet.js
+      const candidates = ["A", "B", "C", "D"];
+      const votes = [];
+
+      // Update display whenever votes or results change
+      function updateDisplay() {
+        // Update HTML list of votes
+        const votesListEl = document.getElementById("votesList");
+        votesListEl.innerHTML = "";
+        votes.forEach((vote, index) => {
+          const li = document.createElement("li");
+          li.textContent = `Vote ${index + 1}: [${vote.join(", ")}]`;
+          const deleteBtn = document.createElement("button");
+          deleteBtn.textContent = "Delete";
+          deleteBtn.style.marginLeft = "10px";
+          deleteBtn.onclick = () => deleteVote(index);
+          li.appendChild(deleteBtn);
+          votesListEl.appendChild(li);
+        });
+
+        // Calculate new ranking via runCondorcet
+        if (votes.length > 0) {
+          try {
+            const ranking = runCondorcet(candidates, votes);
+            document.getElementById("results").textContent =
+              "Ranking: " + ranking.join(" > ");
+          } catch (err) {
+            document.getElementById("results").textContent = "Error: " + err.message;
+          }
+        } else {
+          document.getElementById("results").textContent = "No votes yet.";
+        }
+      }
+
+      // Add a new vote from user input
+      function addVote() {
+        const input = document.getElementById("voteInput").value.trim();
+        if (!input) return;
+        const voteArray = input.split(",").map((v) => parseInt(v.trim(), 10));
+        // Basic validation:
+        if (voteArray.some(isNaN) || voteArray.length !== candidates.length) {
+          alert(`Please enter exactly ${candidates.length} indices (0 to ${candidates.length - 1}).`);
+          return;
+        }
+        votes.push(voteArray);
+        document.getElementById("voteInput").value = "";
+        updateDisplay();
+      }
+
+      // Delete a vote by index
+      function deleteVote(index) {
+        votes.splice(index, 1);
+        updateDisplay();
+      }
+
+      // Clear all votes
+      function clearVotes() {
+        votes.length = 0;
+        updateDisplay();
+      }
+
+      // Initial display
+      updateDisplay();
+    </script>
+  </body>
+</html>
