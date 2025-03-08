@@ -4,7 +4,7 @@ import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from '../../firebase';
 import Header from '../../components/header';
 import { useRouter } from 'next/navigation';
-
+import { registerWithBackend } from '../../utils/auth';
 export default function Signup() {
     const router = useRouter();
     const [email, setEmail] = useState('');
@@ -16,8 +16,19 @@ export default function Signup() {
     const handleSignup = async (e: React.FormEvent) => {
         e.preventDefault();
         try {
+            // Firebase signup
             const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-            // Handle successful signup (e.g., redirect to main page)
+            
+            // Get the Firebase token
+            const token = await userCredential.user.getIdToken();
+            
+            // Store token and user ID in localStorage
+            localStorage.setItem('firebaseToken', token);
+            localStorage.setItem('userId', userCredential.user.uid);
+
+            // Register with backend
+            await registerWithBackend(token);
+
             console.log('User created:', userCredential.user);
             router.push('/main');
         } catch (error) {
