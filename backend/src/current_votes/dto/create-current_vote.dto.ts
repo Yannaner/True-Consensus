@@ -2,8 +2,8 @@ import { IsInt, IsNotEmpty, IsOptional, IsString } from 'class-validator';
 
 export class CreateCurrentVoteDto {
   @IsNotEmpty()
-  @IsInt()
-  user_id: number;
+  @IsString()
+  user_id: string;
 
   @IsNotEmpty()
   @IsInt()
