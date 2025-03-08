@@ -19,20 +19,21 @@ export default function Signup() {
             // Firebase signup
             const userCredential = await createUserWithEmailAndPassword(auth, email, password);
             
-            // Get the Firebase token
-            const token = await userCredential.user.getIdToken();
             
-            // Store token and user ID in localStorage
-            localStorage.setItem('firebaseToken', token);
+            const idToken = await userCredential.user.getIdToken();
+            
+            localStorage.setItem('firebaseIdToken', idToken);
             localStorage.setItem('userId', userCredential.user.uid);
+            
+            console.log('ID Token:', idToken);
+            console.log('User ID:', userCredential.user.uid);
 
-            // Register with backend
-            await registerWithBackend(token);
+            await registerWithBackend(idToken);
 
-            console.log('User created:', userCredential.user);
+            console.log('User created successfully');
             router.push('/main');
         } catch (error) {
-            setError((error as any).message);
+            setError((error as Error).message);
         }
     };
 

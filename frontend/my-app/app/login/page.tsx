@@ -15,18 +15,17 @@ export default function Login() {
         e.preventDefault();
         try {
             const userCredential = await signInWithEmailAndPassword(auth, email, password);
-            // Handle successful login (e.g., redirect to main page)
-
-
-            // Get the Firebase token
-            const token = await userCredential.user.getIdToken();
             
-             // Store token and user ID in localStorage
-            localStorage.setItem('firebaseToken', token);
+            
+            const idToken = await userCredential.user.getIdToken();
+            
+            localStorage.setItem('firebaseIdToken', idToken);
             localStorage.setItem('userId', userCredential.user.uid);
-
-
-            console.log('User logged in:', userCredential.user);
+            
+            console.log('ID Token:', idToken);
+            console.log('User ID:', userCredential.user.uid);
+    
+        
             router.push('/main');
         } catch (error) {
             setError((error as Error).message);
