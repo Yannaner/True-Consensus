@@ -63,7 +63,7 @@ export class ConsensusVoteService {
       // Replace IDs with formatted item names
       const formattedConsensus = ids.map((id, index) => {
         const element = elementsById.get(id.trim());
-        return element ? `${index + 1}. ${element.item}` : `${index + 1}. Unknown item (ID: ${id})`;
+        return element ? `${element.item}` : `Unknown item (ID: ${id})`;
       }).join(', ');
       
       // Add the formatted consensus to the result
