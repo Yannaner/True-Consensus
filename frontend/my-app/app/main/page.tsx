@@ -1,11 +1,14 @@
 "use client";
-import { useRef } from 'react';
+import { useRef, useEffect, useState } from 'react';
 import Header from '../../components/header';
 import Image from 'next/image';
 import { motion } from "motion/react";
+import  axios from 'axios';
+import { stripVTControlCharacters } from 'node:util';
 
 export default function Main() {
     const categoriesRef = useRef<HTMLElement>(null);
+    const [votingData, setVotingData] = useState(null);
 
     const scrollToCategories = () => {
         categoriesRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -17,7 +20,31 @@ export default function Main() {
         borderRadius: 10,
         backgroundColor: "#9911ff",
     }
+    
+      useEffect(() => {
+    const getVotingList = async () => {
+      const url = "https://tcbackend.backendboosterbeast.com/voting-elements/voting_list/1";
 
+      try {
+        let response;
+        axios.get(url).then(res => {
+          response = res.data
+          console.log(response)
+          setVotingData(response)
+        })
+        .catch(error => {
+          console.error(error);
+        });
+        let data = (response as any)
+        console.log("Voting List:", votingData);
+      } catch (error) {
+        console.error("Error fetching voting list:", error);
+      }
+    };
+
+    getVotingList();
+  }, []);
+  
     return (
         <div className="w-full">
             <Header />
@@ -31,22 +58,18 @@ export default function Main() {
             </section>
 
             <section ref={categoriesRef} className="min-h-screen pt-50 p-5 sm:p-16 bg-purple-900/90">
-            {/* <div className='flex items-center justify-center'>
-                <Image src="/voting.png" width={50} height={50} alt="voting image" />
-                </div> */}
-                
                 <div className="flex flex-wrap text-lg gap-8 sm:gap-16 justify-center items-center pt-30">
                     <div className="bg-orange-500/70 rounded-lg w-32 h-32 sm:w-40 sm:h-40 flex items-center justify-center hover:bg-orange-500-/60 transition-all">
-                        Sports
+                        Basketball
                     </div>
                     <div className="bg-blue-500/70 rounded-lg w-32 h-32 sm:w-40 sm:h-40 flex items-center justify-center hover:bg-blue-500-/60 transition-all">
-                        Music
+                        CUNY
                     </div>
                     <div className="bg-red-500/70 rounded-lg w-32 h-32 sm:w-40 sm:h-40 flex items-center justify-center hover:bg-red-500/60 transition-all">
-                        Movies
+                        Foods
                     </div>
                     <div className="bg-green-500/70 rounded-lg w-32 h-32 sm:w-40 sm:h-40 flex items-center justify-center hover:bg-green-500/60 transition-all">
-                        Shows
+                        Energy Drinks
                     </div>
                 </div>
             </section>
