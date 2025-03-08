@@ -22,9 +22,12 @@ export class CurrentVotesService {
     });
 
     if (existingVote) {
-      throw new ConflictException(`User ${existingVote.userId} has already voted on voting list ${existingVote.votingId}`);
+      // Update the existing vote instead of throwing an exception
+      this.currentVoteRepository.merge(existingVote, createCurrentVoteDto);
+      return this.currentVoteRepository.save(existingVote);
     }
     
+    // Create a new vote if one doesn't exist
     const newVote = this.currentVoteRepository.create(createCurrentVoteDto);
     return this.currentVoteRepository.save(newVote);
   }
