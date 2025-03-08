@@ -9,6 +9,7 @@ import { CurrentVotesModule } from './current_votes/current_votes.module';
 import { ConsensusVoteModule } from './consensus_vote/consensus_vote.module';
 import { AuthModule } from './auth/auth.module';
 import { ConfigModule } from '@nestjs/config';
+import { AlgorithmModule } from './algorithm/algorithm.module';
 
 @Module({
   imports: [
@@ -30,6 +31,7 @@ import { ConfigModule } from '@nestjs/config';
     CurrentVotesModule,
     ConsensusVoteModule,
     AuthModule,
+    AlgorithmModule,
   ],
   controllers: [AppController],
   providers: [AppService],

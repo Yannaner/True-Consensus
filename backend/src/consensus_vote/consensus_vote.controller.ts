@@ -3,12 +3,14 @@ import { ConsensusVoteService } from './consensus_vote.service';
 import { CreateConsensusVoteDto } from './dto/create-consensus_vote.dto';
 import { UpdateConsensusVoteDto } from './dto/update-consensus_vote.dto';
 import { VotingElementsService } from '../voting_elements/voting_elements.service';
+import { AlgorithmService } from 'src/algorithm/algorithm.service';
 
 @Controller('consensus-vote')
 export class ConsensusVoteController {
   constructor(
     private readonly consensusVoteService: ConsensusVoteService,
-    private readonly votingElementsService: VotingElementsService
+    private readonly votingElementsService: VotingElementsService,
+    private readonly algoService: AlgorithmService
   ) {}
 
   @Post()
