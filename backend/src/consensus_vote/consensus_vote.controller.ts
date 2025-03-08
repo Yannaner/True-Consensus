@@ -25,7 +25,7 @@ export class ConsensusVoteController {
 
   @Get(':id')
   findOne(@Param('id') id: number) {
-    return this.algoService.calculateConsensus(+id);
+    return this.consensusVoteService.findOne(id);
   }
 
   @Get('voting-elements/:votingId')

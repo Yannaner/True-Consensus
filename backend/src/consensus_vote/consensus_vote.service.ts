@@ -5,18 +5,41 @@ import { CreateConsensusVoteDto } from './dto/create-consensus_vote.dto';
 import { UpdateConsensusVoteDto } from './dto/update-consensus_vote.dto';
 import { ConsensusVote } from './entities/consensus_vote.entity';
 import { VotingElementsService } from 'src/voting_elements/voting_elements.service';
+import { AlgorithmService } from 'src/algorithm/algorithm.service';
 
 @Injectable()
 export class ConsensusVoteService {
   constructor(
     @InjectRepository(ConsensusVote)
     private consensusVoteRepository: Repository<ConsensusVote>,
-    private readonly votingElementsService: VotingElementsService
+    private readonly votingElementsService: VotingElementsService,
+    private readonly algoService: AlgorithmService
+    
   ) {}
 
   async create(createConsensusVoteDto: CreateConsensusVoteDto): Promise<ConsensusVote> {
-    const consensusVote = this.consensusVoteRepository.create(createConsensusVoteDto);
-    return await this.consensusVoteRepository.save(consensusVote);
+    // Get the consensus calculation from algoService
+    const calculatedConsensus = await this.algoService.calculateConsensus(+createConsensusVoteDto.votingId);
+    
+    // Check if a consensus vote already exists for this votingId
+    const existingVote = await this.consensusVoteRepository.findOne({
+      where: { votingId: +createConsensusVoteDto.votingId }
+    });
+  
+    if (existingVote) {
+      // Update existing consensus vote
+      existingVote.calculatedConsensus = calculatedConsensus;
+      return this.consensusVoteRepository.save(existingVote);
+    } else {
+      // Create a new entity with the calculated consensus value
+      const newConsensusVote = this.consensusVoteRepository.create({
+        ...createConsensusVoteDto,
+        calculatedConsensus: calculatedConsensus
+      });
+      
+      // Save to database
+      return this.consensusVoteRepository.save(newConsensusVote);
+    }
   }
 
   async findAll(): Promise<ConsensusVote[]> {
@@ -26,6 +49,8 @@ export class ConsensusVoteService {
   }
 
   async findOne(votingId: number): Promise<any> {
+    await this.create({ votingId: votingId });
+
     const consensusVote = await this.consensusVoteRepository.findOne({
       where: { votingId },
       relations: ['voting'],
