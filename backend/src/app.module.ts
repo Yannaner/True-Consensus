@@ -7,9 +7,13 @@ import { VotingListModule } from './voting_list/voting_list.module';
 import { VotingElementsModule } from './voting_elements/voting_elements.module';
 import { CurrentVotesModule } from './current_votes/current_votes.module';
 import { ConsensusVoteModule } from './consensus_vote/consensus_vote.module';
+import { AuthModule } from './auth/auth.module';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
+    ConfigModule.forRoot({      isGlobal: true, // Make environment variables available globally
+    }),
     TypeOrmModule.forRoot({
       type: 'postgres',
       host: 'localhost',
@@ -25,6 +29,7 @@ import { ConsensusVoteModule } from './consensus_vote/consensus_vote.module';
     VotingElementsModule,
     CurrentVotesModule,
     ConsensusVoteModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],
