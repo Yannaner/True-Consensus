@@ -10,9 +10,8 @@ export class UsersController {
 
   @Post()
   @UseGuards(FirebaseAuthGuard)
-  create(@Req() req, @Body() createUserDto: CreateUserDto) {
-    console.log("User ID: ", req.user.uid);
-    return this.usersService.create(createUserDto);
+  create(@Req() req) {
+    return this.usersService.createWithId(req.user.uid);
   }
 
   @Get()

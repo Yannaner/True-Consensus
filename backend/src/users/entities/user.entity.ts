@@ -6,11 +6,6 @@ export class User {
   @PrimaryColumn()
   user_id: string;
 
-  @BeforeInsert()
-  generateId() {
-    this.user_id = uuidv4();
-  }
-
   @Column({ length: 100 })
   first_name: string;
 
