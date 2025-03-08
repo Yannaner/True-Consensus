@@ -4,6 +4,7 @@ import { Repository } from 'typeorm';
 import { CreateCurrentVoteDto } from './dto/create-current_vote.dto';
 import { UpdateCurrentVoteDto } from './dto/update-current_vote.dto';
 import { CurrentVote } from './entities/current_vote.entity';
+import { Console } from 'console';
 
 @Injectable()
 export class CurrentVotesService {
@@ -13,25 +14,33 @@ export class CurrentVotesService {
   ) {}
 
   async create(createCurrentVoteDto: CreateCurrentVoteDto, user_id: string): Promise<CurrentVote> {
-    // Check if the user already voted on this voting list
+    // Check if the user already voted on this specific voting list
+    console.log("user wants to vote on voting list: ", createCurrentVoteDto.voting_id);
     const existingVote = await this.currentVoteRepository.findOne({
       where: {
         userId: user_id,
         votingId: createCurrentVoteDto.voting_id
       }
     });
-
     if (existingVote) {
-      // Update the existing vote instead of throwing an exception
-      this.currentVoteRepository.merge(existingVote, createCurrentVoteDto);
+      console.log("existing vote exists: ", existingVote);
+
+      // Update the existing vote for this specific voting list
+      this.currentVoteRepository.merge(existingVote, {
+        ranking: createCurrentVoteDto.ranking
+        // Add any other fields that should be updated here
+      });
       return this.currentVoteRepository.save(existingVote);
     }
     
-    // Create a new vote if one doesn't exist
+    // Create a new vote since one doesn't exist for this voting list
     const newVote = this.currentVoteRepository.create({
-      ...createCurrentVoteDto,
-      userId: user_id  // Set the userId explicitly
+      votingId: createCurrentVoteDto.voting_id,
+      ranking: createCurrentVoteDto.ranking,
+      userId: user_id
+      // Include any other necessary fields from createCurrentVoteDto
     });
+    
     return this.currentVoteRepository.save(newVote);
   }
 
