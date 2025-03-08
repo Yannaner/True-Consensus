@@ -151,6 +151,7 @@ import { useSearchParams } from 'next/navigation';
 export default function VotePage({}) {
   const searchParams = useSearchParams();
   const id = searchParams.get('id');
+  const question = searchParams.get('question');
   const [topPlayers, setTopPlayers] = useState<string[]>([]);
   const [votingData, setVotingData] = useState<any>(null); // Store the voting data
   const dragItem = useRef<number | null>(null);
@@ -236,7 +237,7 @@ export default function VotePage({}) {
   return (
     <div className="vote-page">
       <div className="left-side" onDrop={handleDrop} onDragOver={handleDragOver}>
-        <h2 className="top-players-header">Top 10 Players</h2>
+        <h2 className="top-players-header">Top 10 Items</h2>
         <div className="top-players-list">
           {topPlayers.length === 0 ? (
             <p>No items selected yet. Drag and drop here!</p>
@@ -263,7 +264,7 @@ export default function VotePage({}) {
 
       <div className="right-side">
         <div className="header">
-          <h1>What's the top 10 colleges?</h1>
+          <h1>{question}</h1>
         </div>
         <div className="items">
           <p>Items</p>
