@@ -146,8 +146,11 @@
 import { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import Header from "../../components/header";
+import { useSearchParams } from 'next/navigation';
 
-export default function VotePage() {
+export default function VotePage({}) {
+  const searchParams = useSearchParams();
+  const id = searchParams.get('id');
   const [topPlayers, setTopPlayers] = useState<string[]>([]);
   const [votingData, setVotingData] = useState<any>(null); // Store the voting data
   const dragItem = useRef<number | null>(null);
@@ -155,7 +158,10 @@ export default function VotePage() {
 
   useEffect(() => {
     const getVotingList = async () => {
-      const url = "https://tcbackend.backendboosterbeast.com/voting-elements/voting_list/1";
+      const voteList = "https://tcbackend.backendboosterbeast.com/voting-elements/voting_list/";
+      const voteSet = id;
+
+      const url = voteList + voteSet;
 
       try {
         let response;
@@ -233,7 +239,7 @@ export default function VotePage() {
         <h2 className="top-players-header">Top 10 Players</h2>
         <div className="top-players-list">
           {topPlayers.length === 0 ? (
-            <p>No players selected yet. Drag and drop players here!</p>
+            <p>No items selected yet. Drag and drop here!</p>
           ) : (
             topPlayers.map((player, index) => (
               <div

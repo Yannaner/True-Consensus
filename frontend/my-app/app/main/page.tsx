@@ -6,6 +6,7 @@ import { motion } from "motion/react";
 import { useRouter } from 'next/navigation';
 import  axios from 'axios';
 import { stripVTControlCharacters } from 'node:util';
+import Category from '../../components/Category';
 
 export default function Main() {
     const router = useRouter();
@@ -34,7 +35,7 @@ export default function Main() {
     
       useEffect(() => {
     const getVotingList = async () => {
-      const url = "https://tcbackend.backendboosterbeast.com/voting-elements/voting_list/1";
+      const url = "https://tcbackend.backendboosterbeast.com/voting-elements/voting_list/";
 
       try {
         let response;
@@ -81,18 +82,30 @@ export default function Main() {
 
             <section ref={categoriesRef} className="min-h-screen pt-50 p-5 sm:p-16 bg-purple-900/90">
                 <div className="flex flex-wrap text-lg gap-8 sm:gap-16 justify-center items-center pt-30">
-                    <div className="bg-orange-500/70 rounded-lg w-32 h-32 sm:w-40 sm:h-40 flex items-center justify-center hover:bg-orange-500-/60 transition-all">
-                        Basketball
-                    </div>
-                    <div className="bg-blue-500/70 rounded-lg w-32 h-32 sm:w-40 sm:h-40 flex items-center justify-center hover:bg-blue-500-/60 transition-all">
-                        CUNY
-                    </div>
-                    <div className="bg-red-500/70 rounded-lg w-32 h-32 sm:w-40 sm:h-40 flex items-center justify-center hover:bg-red-500/60 transition-all">
-                        Foods
-                    </div>
-                    <div className="bg-green-500/70 rounded-lg w-32 h-32 sm:w-40 sm:h-40 flex items-center justify-center hover:bg-green-500/60 transition-all">
-                        Energy Drinks
-                    </div>
+                    <Category 
+                        id={1}
+                        question="What are the top 10 basketball players?"
+                        title="Basketball"
+                        color="orange"
+                    />
+                    <Category 
+                        id={2}
+                        question="What are the top 10 CUNY schools?"
+                        title="CUNY"
+                        color="blue"
+                    />
+                    <Category 
+                        id={3}
+                        question="What are the top 10 foods?"
+                        title="Foods"
+                        color="red"
+                    />
+                    <Category 
+                        id={4}
+                        question="What are the top 10 energy drinks?"
+                        title="Energy Drinks"
+                        color="green"
+                    />
                 </div>
             </section>
         </div>
