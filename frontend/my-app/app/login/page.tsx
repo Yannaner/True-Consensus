@@ -4,9 +4,9 @@ export default function Login() {
     return (
         <div>
             <Header />
-            <div className="min-h-screen pt-8">
-                <div className="flex justify-center items-center h-screen">
-                    <form className='flex flex-col gap-4 p-8 pb-10 border rounded-lg shadow-lg bg-white/10 w-full max-w-md mx-4'>
+            <main className="pt-50 px-4">
+                <div className="flex justify-center">
+                    <form className='flex flex-col gap-4 p-8 pb-10 border rounded-lg shadow-lg bg-white/10 w-full max-w-md'>
                         <h1 className="text-2xl font-bold mb-4">Login</h1>
                         <div className="flex flex-col gap-2">
                             <label className="text-sm">Email</label>
@@ -19,7 +19,7 @@ export default function Login() {
                         <button type="submit" className='rounded border p-2 cursor-pointer'>Submit</button>
                     </form>
                 </div>
-            </div>
+            </main>
         </div>
     )
 }

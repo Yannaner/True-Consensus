@@ -4,7 +4,7 @@ export default function Signup() {
     return (
         <div>
             <Header />
-            <div className="min-h-screen pt-15">
+            <main className="pt-25 p-4">
                 <div className="flex justify-center items-center h-screen">
                     <form className='flex flex-col gap-4 p-8 pb-10 border rounded-lg shadow-lg bg-white/10 w-full max-w-md mx-4'>
                         <h1 className="text-2xl font-bold mb-4">Sign Up</h1>
@@ -31,7 +31,7 @@ export default function Signup() {
                         <button type="submit" className='rounded border p-2 cursor-pointer'>Submit</button>
                     </form>
                 </div>
-            </div>
+            </main>
         </div>
     )
 }
