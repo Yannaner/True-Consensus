@@ -1,5 +1,6 @@
 @import "tailwindcss";
 
+/* Global Root Styles */
 :root {
   --background: #ffffff;
   --foreground: #171717;
@@ -19,8 +20,201 @@
   }
 }
 
+/* Body and General Layout */
 body {
-  background: linear-gradient(to right, red, blue);
+  background: linear-gradient(to right, #801922, #194980);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Trebuchet MS';
+  margin: 0;
+  padding: 0;
+}
+
+/* Header */
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: transparent;
+  z-index: 10;
+  padding: 20px;
+  color: white;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.header h1 {
+  font-size: 2rem;
+  color: white;
+}
+
+/* Vote Page Layout */
+.vote-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: row;
+  padding: 90px 20px 20px;
+  gap: 20px;
+}
+
+/* Left Side */
+.left-side {
+  width: 50%;
+  background-color: rgba(255, 255, 255, 0.5);
+  padding: 20px 20px 20px 30px;
+  min-height: 300px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  overflow-y: auto;
+}
+
+.left-side .top-players-header {
+  font-size: 1.5rem;
+  color: black;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+.left-side .top-players-list {
+  background-color: #fff;
+  padding: 15px;
+  border-radius: 8px;
+  min-height: 200px;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+}
+
+.left-side .top-player-item {
+  background: white;
+  padding: 8px;
+  color: black;
+  border-radius: 40px;
+  margin: 5px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: background-color 0.3s, box-shadow 0.3s;
+  box-shadow: 2 5px 5px rgba(0, 0, 0, 0.205);
+  outline: rgba(255, 255, 255, 0.5);
+}
+
+.left-side .top-player-item:hover {
+  background: black;
+  color: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  font-weight: bold;
+}
+
+.delete-button {
+  margin-left: 10px;
+  background-color: transparent;
+  border: none;
+  color: red;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.delete-button:hover {
+  color: darkred;
+}
+
+/* Right Side */
+.right-side {
+  width: 50%;
+  padding: 20px;
+  min-height: 500px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+.right-side .items {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 20px;
+  font-size: 1.5em;
+  color: black;
+  font-weight: bold;
+}
+
+.sport-button {
+  background-color: #edf2f7;
+  color: #2d3748;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s, box-shadow 0.3s;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+.sport-button:hover {
+  background-color: black;
+  color: white;
+  transform: scale(1.05);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+  font-weight: bold;
+}
+
+.sport-button.selected {
+  background-color: black;
+  color: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* Players Section */
+.players-container {
+  margin-top: 20px;
+}
+
+.players-list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  max-height: 500px;
+  overflow-y: auto;
+}
+
+.players-list p {
+  background-color: white;
+  color: black;
+  padding: 8px;
+  border-radius: 8px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
+  border-radius: 40px;
+  text-align: center;
+}
+
+.players-list p:hover {
+  background: black;
+  color: white;
+  transform: scale(1.03);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  font-weight: bold;
+}
+
+.top-players-list {
+  color: black;
+}
+
+/* Submit Button */
+.submit-button {
+  margin-top: 15px;
+  padding: 10px 20px;
+  background-color: white;
+  color: black;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s, box-shadow 0.3s;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+.submit-button:hover {
+  background-color: rgba(0, 0, 0, 0.5);
+  background-color: black;
+  color: white;
+  font-weight: bold;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
 }
