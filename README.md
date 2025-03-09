@@ -23,4 +23,33 @@ One of our toughest challenges was ensuring that every authenticated user could 
 we learned how to stack cups like a pro.
 
 ## What’s Next for TrueConsensus 🔮
-Our focus is on **scaling the platform** to serve an even larger community. We’re excited to expand the reach of our **transparent, community-driven voting system** and continue **disrupting outdated methods** with fresh, user-first innovations in voting.
+- Scaling the platform to serve a larger community
+- Expanding the reach of our transparent, community-driven voting system
+- Disrupting outdated voting methods with fresh, user-first innovations
+
+## How to Contribute to TrueConsensus
+
+We welcome contributions from the community to help improve TrueConsensus. Whether you want to work on the backend algorithms or the frontend application, follow the steps below to get started.
+
+### Contributing to the Backend
+
+1. **Clone the Repository**: 
+   ```bash
+   git clone https://github.com/ShashiSugrim/TrueConsensus.git
+   cd TrueConsensus/backend
+   ```
+2. **Setup the Environment**: 
+   ```bash
+   npm install
+   ```
+3. **Modify the Algorithm**: 
+  - Navigate to the src directory where the backend algorithm is located.
+  - Follow the conventions provided in the existing code to replace or modify the algorithm.
+  - Ensure that your changes maintain the integrity and functionality of the system.
+4. **Commit and Push**: 
+   ```bash
+   git commit -m "Describe your changes here"
+   git push origin your-branch-name
+   ```
+
+
