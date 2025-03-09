@@ -22,7 +22,14 @@ export default function Main() {
     }, [router]);
     const [votingData, setVotingData] = useState(null);
     const [rankingData, setRankingData] = useState(null);
-    const [categories, setCategories] = useState([]);
+    interface CategoryType {
+        id: number;
+        question: string;
+        title: string;
+        color: string;
+    }
+    
+    const [categories, setCategories] = useState<CategoryType[]>([]);
 
     const scrollToCategories = () => {
         categoriesRef.current?.scrollIntoView({ behavior: 'smooth' });
