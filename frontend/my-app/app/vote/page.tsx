@@ -26,18 +26,32 @@ export default function VotePage({}) {
     const getVotingList = async () => {
       const voteList = "https://tcbackend.backendboosterbeast.com/voting-elements/voting_list/";
       const voteSet = id;
-
       const url = voteList + voteSet;
 
       try {
+        // Get backend data
         let response;
-        axios.get(url)
+        await axios.get(url)
           .then(res => {
             response = res.data;
-            console.log(response);
-            setVotingData(response); // Correctly sets voting data
+            
+            // Get localStorage data
+            const localElements = JSON.parse(localStorage.getItem('votingElements') || '[]');
+            const localVotingElements = localElements.filter(
+              (elem: any) => elem.voting_id.toString() === id
+            );
+            
+            // Combine backend and localStorage data
+            const combinedData = [...response, ...localVotingElements];
+            setVotingData(combinedData);
           })
           .catch(error => {
+            // If backend fails, try localStorage only
+            const localElements = JSON.parse(localStorage.getItem('votingElements') || '[]');
+            const localVotingElements = localElements.filter(
+              (elem: any) => elem.voting_id.toString() === id
+            );
+            setVotingData(localVotingElements);
             console.error(error);
           });
       } catch (error) {
@@ -46,7 +60,7 @@ export default function VotePage({}) {
     };
 
     getVotingList();
-  }, []);
+  }, [id]);
 
   const handleDragStart = (event: React.DragEvent, player: string) => {
     event.dataTransfer.setData("player", player);

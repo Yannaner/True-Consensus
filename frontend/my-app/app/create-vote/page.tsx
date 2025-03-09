@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Header from '@/components/header';
+import axios from 'axios';
 
 export default function CreateVote() {
     const router = useRouter();
@@ -46,20 +47,31 @@ export default function CreateVote() {
         try {
             const newId = Date.now();
             
+            // Create the vote group object
             const newVoteGroup = {
                 id: newId,
-                title: title,
+                voting_id: newId, // Add this to match backend format
                 question: question,
-                color: "blue",
+                title: title,
+                voting_amt: 0,
                 options: options.filter(opt => opt.trim() !== '')
             };
 
-            // Save to localStorage
+            // Save vote group to localStorage
             const existingGroups = JSON.parse(localStorage.getItem('voteGroups') || '[]');
             existingGroups.push(newVoteGroup);
             localStorage.setItem('voteGroups', JSON.stringify(existingGroups));
 
-            // Redirect to main page where categories are displayed
+            // Save voting elements to localStorage
+            const existingElements = JSON.parse(localStorage.getItem('votingElements') || '[]');
+            const newElements = newVoteGroup.options.map((option, index) => ({
+                id: newId + index,
+                voting_id: newId,
+                item: option
+            }));
+            existingElements.push(...newElements);
+            localStorage.setItem('votingElements', JSON.stringify(existingElements));
+
             await router.push('/main');
         } catch (error) {
             console.error('Error creating vote group:', error);
@@ -129,23 +141,6 @@ export default function CreateVote() {
                             Add Option
                         </button>
                     </div>
-{/* 
-                    <div className="space-y-2">
-                        <label className="block text-white">Image (Optional)</label>
-                        <input
-                            type="file"
-                            accept="image/*"
-                            onChange={handleImageChange}
-                            className="text-white"
-                        />
-                        {imagePreview && (
-                            <img
-                                src={imagePreview}
-                                alt="Preview"
-                                className="mt-2 max-h-40 rounded"
-                            />
-                        )}
-                    </div> */}
 
                     <div className="flex gap-4">
                         <button
