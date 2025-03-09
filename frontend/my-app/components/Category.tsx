@@ -24,7 +24,7 @@ export default function Category({ id, question, title, color }: CategoryProps) 
             try {
                 // First get the calculated consensus
                 const consensusResponse = await axios.get(`https://tcbackend.backendboosterbeast.com/consensus-vote/${id}`);
-                const consensusRank = consensusResponse.data.formattedConsensus.split(', ').splice(0,3);
+                const consensusRank = consensusResponse.data.formattedConsensus.split(', ').splice(0,5);
 
                 // Then get the items list to map IDs to names
                 const itemsResponse = await axios.get(`https://tcbackend.backendboosterbeast.com/voting-elements/voting_list/${id}`);

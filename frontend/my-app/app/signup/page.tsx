@@ -5,6 +5,8 @@ import { auth } from '../../firebase';
 import Header from '../../components/header';
 import { useRouter } from 'next/navigation';
 import { registerWithBackend } from '../../utils/auth';
+import axios from 'axios';
+
 export default function Signup() {
     const router = useRouter();
     const [email, setEmail] = useState('');
@@ -17,6 +19,7 @@ export default function Signup() {
         e.preventDefault();
         try {
             // Firebase signup
+            const url = 'https://tcbackend.backendboosterbeast.com/users';
             const userCredential = await createUserWithEmailAndPassword(auth, email, password);
             
             
@@ -26,6 +29,31 @@ export default function Signup() {
             localStorage.setItem('userId', userCredential.user.uid);
             
             console.log('ID Token:', idToken);
+            
+            const data = JSON.stringify({
+                first_name: "default",
+                last_name: "default"
+            });
+            
+            const config = {
+                method: 'post',
+                maxBodyLength: Infinity,
+                url: url,
+                headers: { 
+                    'Content-Type': 'application/json', 
+                    'Authorization': `Bearer ${idToken}`
+                },
+                data: data
+            };
+            
+            await axios.request(config)
+                .then((response) => {
+                    console.log(JSON.stringify(response.data));
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+                
             console.log('User ID:', userCredential.user.uid);
 
             //await registerWithBackend(idToken);

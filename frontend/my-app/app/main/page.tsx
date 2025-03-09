@@ -36,7 +36,7 @@ export default function Main() {
     
       useEffect(() => {
     const getVotingList = async () => {
-      const url = "https://tcbackend.backendboosterbeast.com/voting-elements/voting_list/";
+      const url = "https://tcbackend.backendboosterbeast.com/voting_list/";
 
       try {
         let response;
