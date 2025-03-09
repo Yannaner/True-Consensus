@@ -80,25 +80,20 @@ export default function Main() {
             const hardcodedCategories = [
                 {
                     id: 1,
-                    question: "What are the top 10 basketball players?",
+                    question: "What are the top 5 basketball players?",
                     title: "Basketball",
                     color: "orange"
                 },
                 {
                     id: 2,
-                    question: "What are the top 10 CUNY schools?",
+                    question: "What are the top 5 CUNY schools?",
                     title: "CUNY",
                     color: "blue"
                 },
-                {
-                    id: 3,
-                    question: "What are the top 10 foods?",
-                    title: "Food",
-                    color: "red"
-                },
+                
                 {
                     id: 4,
-                    question: "What are the top 10 energy drinks?",
+                    question: "What are the top 5 GenZ Language",
                     title: "Memes",
                     color: "green"
                 }
