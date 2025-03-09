@@ -4,7 +4,6 @@ import axios from "axios";
 import Header from "../../components/header";
 import { useSearchParams } from 'next/navigation';
 
-// Add this interface at the top with your other interfaces
 interface VotingItem {
   id: number;
   item: string;
@@ -15,9 +14,13 @@ export default function VotePage({}) {
   const id = searchParams.get('id');
   const question = searchParams.get('question');
   const [topPlayers, setTopPlayers] = useState<string[]>([]);
-  const [votingData, setVotingData] = useState<VotingItem[]>([]);  // Add type
+  const [votingData, setVotingData] = useState<VotingItem[]>([]);
   const dragItem = useRef<number | null>(null);
   const dragOverItem = useRef<number | null>(null);
+
+  const isInTopPlayers = (itemName: string) => {
+    return topPlayers.includes(itemName);
+  };
 
   useEffect(() => {
     const getVotingList = async () => {
@@ -115,7 +118,7 @@ export default function VotePage({}) {
       }
     };
 
-    pushData();  // Execute the async function
+    pushData();
   }
 
   const onDragStartTopPlayers = (event: React.DragEvent, index: number) => {
@@ -142,57 +145,62 @@ export default function VotePage({}) {
   };
 
   return (
-    <div className="vote-page">
-      <div className="left-side" onDrop={handleDrop} onDragOver={handleDragOver}>
-        <h2 className="top-players-header">Top 10 Items</h2>
-        <div className="top-players-list">
-          {topPlayers.length === 0 ? (
-            <p>No items selected yet. Drag and drop here!</p>
-          ) : (
-            topPlayers.map((player, index) => (
-              <div
-                key={player}
-                className="top-player-item"
-                draggable
-                onDragStart={(e) => onDragStartTopPlayers(e, index)}
-                onDragEnter={(e) => onDragEnterTopPlayers(e, index)}
-                onDragEnd={onDragEndTopPlayers}
-              >
-                <span>{index + 1}. {player}</span>
-                <button onClick={() => handleDelete(player)} className="delete-button">
-                  ✖️
-                </button>
+    <div className="flex flex-col min-h-screen">
+      <Header />
+      <div className="text-center pt-30">
+        <h1 className="text-4xl">{question}</h1>
+      </div>
+      <div className="vote-page">
+        <div className="left-side" onDrop={handleDrop} onDragOver={handleDragOver}>
+          <h2 className="top-players-header">Top 10 Items</h2>
+          <div className="top-players-list">
+            {topPlayers.length === 0 ? (
+              <p>No items selected yet. Drag and drop here!</p>
+            ) : (
+              topPlayers.map((player, index) => (
+                <div
+                  key={player}
+                  className="top-player-item"
+                  draggable
+                  onDragStart={(e) => onDragStartTopPlayers(e, index)}
+                  onDragEnter={(e) => onDragEnterTopPlayers(e, index)}
+                  onDragEnd={onDragEndTopPlayers}
+                >
+                  <span>{index + 1}. {player}</span>
+                  <button onClick={() => handleDelete(player)} className="delete-button">
+                    ✖️
+                  </button>
+                </div>
+              ))
+            )}
+          </div>
+          <button onClick={handleSubmit} className="submit-button">Submit</button>
+        </div>
+
+        <div className="right-side">
+          <div className="items">
+            <p>Items</p>
+          </div>
+
+          {votingData && (
+            <div className="players-container">
+              <div className="players-list">
+                {votingData.map((item: any) => (
+                  !isInTopPlayers(item.item) && (
+                    <div
+                      key={item.id}
+                      className="player-item"
+                      draggable
+                      onDragStart={(e) => handleDragStart(e, item.item)}
+                    >
+                      <p>{item.item}</p>
+                    </div>
+                  )
+                ))}
               </div>
-            ))
+            </div>
           )}
         </div>
-        <button onClick={handleSubmit} className="submit-button">Submit</button>
-      </div>
-
-      <div className="right-side">
-        <div className="header">
-          <h1>{question}</h1>
-        </div>
-        <div className="items">
-          <p>Items</p>
-        </div>
-
-        {votingData && (
-          <div className="players-container">
-            <div className="players-list">
-              {votingData.map((item: any) => (
-                <div
-                  key={item.id} // Ensure unique key for each item
-                  className="player-item"
-                  draggable
-                  onDragStart={(e) => handleDragStart(e, item.item)}
-                >
-                  <p>{item.item}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
       </div>
     </div>
   );
