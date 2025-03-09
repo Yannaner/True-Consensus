@@ -43,9 +43,28 @@ export default function CreateVote() {
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        // Here you would typically send data to backend
-        // For now, just redirect back to main page
-        router.push('/main');
+        try {
+            // Generate a unique ID that won't conflict with hardcoded IDs (1-4)
+            const newId = Date.now();
+            
+            const newVoteGroup = {
+                id: newId,
+                title: title,
+                question: question,
+                color: "blue", // Default color
+                options: options.filter(opt => opt.trim() !== '')
+            };
+
+            // Get existing vote groups and append new one
+            const existingGroups = JSON.parse(localStorage.getItem('voteGroups') || '[]');
+            existingGroups.push(newVoteGroup);
+            localStorage.setItem('voteGroups', JSON.stringify(existingGroups));
+
+            router.push('/main');
+        } catch (error) {
+            console.error('Error creating vote group:', error);
+            alert('Failed to create vote group. Please try again.');
+        }
     };
 
     return (

@@ -22,6 +22,7 @@ export default function Main() {
     }, [router]);
     const [votingData, setVotingData] = useState(null);
     const [rankingData, setRankingData] = useState(null);
+    const [categories, setCategories] = useState([]);
 
     const scrollToCategories = () => {
         categoriesRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -62,6 +63,45 @@ export default function Main() {
 
     getVotingList();
   }, []);
+
+    useEffect(() => {
+        const loadCategories = () => {
+            // Load stored categories from localStorage
+            const storedCategories = JSON.parse(localStorage.getItem('voteGroups') || '[]');
+            
+            // Combine with hardcoded categories
+            const hardcodedCategories = [
+                {
+                    id: 1,
+                    question: "What are the top 10 basketball players?",
+                    title: "Basketball",
+                    color: "orange"
+                },
+                {
+                    id: 2,
+                    question: "What are the top 10 CUNY schools?",
+                    title: "CUNY",
+                    color: "blue"
+                },
+                {
+                    id: 3,
+                    question: "What are the top 10 foods?",
+                    title: "Food",
+                    color: "red"
+                },
+                {
+                    id: 4,
+                    question: "What are the top 10 energy drinks?",
+                    title: "Memes",
+                    color: "green"
+                }
+            ];
+
+            setCategories([...hardcodedCategories, ...storedCategories]);
+        };
+
+        loadCategories();
+    }, []);
   
     return (
         <div className="w-full">
@@ -101,30 +141,15 @@ export default function Main() {
                     </button>
                 </div>
                 <div className="flex flex-wrap text-lg gap-8 sm:gap-16 justify-center items-center pt-30">
-                    <Category 
-                        id={1}
-                        question="What are the top 10 basketball players?"
-                        title="Basketball"
-                        color="orange"
-                    />
-                    <Category 
-                        id={2}
-                        question="What are the top 10 CUNY schools?"
-                        title="CUNY"
-                        color="blue"
-                    />
-                    <Category 
-                        id={3}
-                        question="What are the top 10 foods?"
-                        title="Food"
-                        color="red"
-                    />
-                    <Category 
-                        id={4}
-                        question="What are the top 10 energy drinks?"
-                        title="Memes"
-                        color="green"
-                    />
+                    {categories.map((category) => (
+                        <Category 
+                            key={category.id}
+                            id={category.id}
+                            question={category.question}
+                            title={category.title}
+                            color={category.color || "blue"}
+                        />
+                    ))}
                 </div>
             </section>
         </div>
