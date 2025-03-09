@@ -22,7 +22,7 @@
 
 /* Body and General Layout */
 body {
-  background: linear-gradient(to right, #801922, #194980);
+  background: linear-gradient(to right,#6c011f, #000000 50%, #02025d);
   color: var(--foreground);
   font-family: 'Trebuchet MS';
   margin: 0;

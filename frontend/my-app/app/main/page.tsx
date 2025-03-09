@@ -31,7 +31,12 @@ export default function Main() {
         width: 150,
         height: 100,
         borderRadius: 10,
-        backgroundColor: "#9911ff",
+        backgroundColor: "#2A2A2A",
+        color: 'white',
+        border: '2px solid #4A4A4A',
+        boxShadow: '0 0 15px rgba(255, 255, 255, 0.3)',
+        transition: 'all 0.3s ease',
+        cursor: 'pointer'
     }
     
       useEffect(() => {
@@ -62,8 +67,12 @@ export default function Main() {
         <div className="w-full">
             <Header />
             <section className="flex min-h-screen items-center justify-center flex-col">
-                <p className="text-3xl sm:text-5xl pt-15 pb-8">Voting Made Better</p>
-                <p className="text-xl sm:text-3xl pb-20 m-5">Your Voice, Your Choice — Powered by Accurate Algorithms</p>
+                <p className="text-4xl sm:text-6xl font-bold pb-8 text-white drop-shadow-[0_0_25px_rgba(255,255,255,0.15)]">
+                    Voting Made Better
+                </p>
+                <p className="text-xl sm:text-3xl pb-20 m-5 text-gray-200 font-light tracking-wide text-center max-w-3xl leading-relaxed">
+                    Your Voice, Your Choice — Powered by Transparent Algorithms
+                </p>
                 <div className='flex sm:gap-6'>
                     <motion.button 
                         style={box} 
@@ -75,7 +84,22 @@ export default function Main() {
                 </div>
             </section>
 
-            <section ref={categoriesRef} className="min-h-screen pt-50 p-5 sm:p-16 bg-purple-900/90">
+           <section 
+                ref={categoriesRef} 
+                className="min-h-screen pt-50 p-5 sm:p-16 bg-gradient-to-r from-[#6c011f] via-[#000000] to-[#02025d] backdrop-blur-sm"
+            >
+                <div className="flex justify-between items-center mb-8">
+                    <h2 className="text-3xl font-bold text-white">Voting Categories</h2>
+                    <button 
+                        onClick={() => router.push('/create-vote')}
+                        className="bg-green-500/50 hover:bg-green-500/70 text-white px-6 py-3 rounded-lg shadow-lg transition-all duration-300 backdrop-blur-sm border border-white/10 flex items-center gap-2"
+                    >
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+                        </svg>
+                        Create New Topic
+                    </button>
+                </div>
                 <div className="flex flex-wrap text-lg gap-8 sm:gap-16 justify-center items-center pt-30">
                     <Category 
                         id={1}
@@ -106,34 +130,3 @@ export default function Main() {
         </div>
     );
 }
-
-// function Header() {
-//     return (
-//       <header className="bg-blue-600 text-white p-4 flex justify-between items-center shadow-md">
-//         <h1 className="text-2xl font-bold">True Consensus</h1>
-//         <div className="space-x-4">
-//           <button className="px-4 py-2 bg-white text-blue-600 rounded-md shadow hover:bg-gray-100">
-//             Login
-//           </button>
-//           <button className="px-4 py-2 bg-blue-500 text-white rounded-md shadow hover:bg-blue-700">
-//             Sign Up
-//           </button>
-//         </div>
-//       </header>
-//     );
-//   }
-  
-//   export default function Main() {
-//     return (
-//       <div className="min-h-screen flex flex-col items-center justify-center bg-gray-100">
-//         <Header />
-//         <div className="text-center mt-10 p-6 bg-white rounded-lg shadow-md">
-//           <h2 className="text-xl font-semibold mb-4">Voting made better and easier</h2>
-//           <button className="px-6 py-3 bg-green-500 text-white rounded-md shadow hover:bg-green-600">
-//             View Categories
-//           </button>
-//         </div>
-//       </div>
-//     );
-//   }
-  
