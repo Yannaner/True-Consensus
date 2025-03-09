@@ -129,7 +129,7 @@ export default function Main() {
                 className="min-h-screen pt-50 p-5 sm:p-16 bg-gradient-to-r from-[#6c011f] via-[#000000] to-[#02025d] backdrop-blur-sm"
             >
                 <div className="flex justify-between items-center mb-8">
-                    <h2 className="text-3xl font-bold text-white">Voting Categories</h2>
+                    {/* <h2 className="text-3xl font-bold text-white">Voting Categories</h2> */}
                     <button 
                         onClick={() => router.push('/create-vote')}
                         className="bg-green-500/50 hover:bg-green-500/70 text-white px-6 py-3 rounded-lg shadow-lg transition-all duration-300 backdrop-blur-sm border border-white/10 flex items-center gap-2"
@@ -140,7 +140,7 @@ export default function Main() {
                         Create New Topic
                     </button>
                 </div>
-                <div className="flex flex-wrap text-lg gap-8 sm:gap-16 justify-center items-center pt-30">
+                <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8 max-w-7xl mx-auto">
                     {categories.map((category) => (
                         <Category 
                             key={category.id}

@@ -129,7 +129,7 @@ export default function CreateVote() {
                             Add Option
                         </button>
                     </div>
-
+{/* 
                     <div className="space-y-2">
                         <label className="block text-white">Image (Optional)</label>
                         <input
@@ -145,14 +145,23 @@ export default function CreateVote() {
                                 className="mt-2 max-h-40 rounded"
                             />
                         )}
-                    </div>
+                    </div> */}
 
-                    <button
-                        type="submit"
-                        className="w-full px-4 py-2 bg-white/20 hover:bg-white/30 rounded text-white transition-all duration-300"
-                    >
-                        Create Vote Group
-                    </button>
+                    <div className="flex gap-4">
+                        <button
+                            type="button"
+                            onClick={() => router.back()}
+                            className="w-1/2 px-4 py-2 bg-red-500/50 hover:bg-red-500/70 rounded text-white transition-all duration-300"
+                        >
+                            Cancel
+                        </button>
+                        <button
+                            type="submit"
+                            className="w-1/2 px-4 py-2 bg-white/20 hover:bg-white/30 rounded text-white transition-all duration-300"
+                        >
+                            Create Vote Group
+                        </button>
+                    </div>
                 </form>
             </div>
         </div>
