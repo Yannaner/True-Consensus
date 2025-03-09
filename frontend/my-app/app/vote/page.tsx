@@ -3,6 +3,7 @@ import { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import Header from "../../components/header";
 import { useSearchParams } from 'next/navigation';
+import { useRouter } from 'next/navigation'; // Add this import
 
 interface VotingItem {
   id: number;
@@ -17,6 +18,7 @@ export default function VotePage({}) {
   const [votingData, setVotingData] = useState<VotingItem[]>([]);
   const dragItem = useRef<number | null>(null);
   const dragOverItem = useRef<number | null>(null);
+  const router = useRouter(); // Add this line
 
   const isInTopPlayers = (itemName: string) => {
     return topPlayers.includes(itemName);
@@ -122,6 +124,7 @@ export default function VotePage({}) {
           
           console.log("Vote submitted successfully:", response.data);
           alert("Vote submitted successfully!");
+          router.push('/main'); // Add this line for redirection
         } else {
           console.error("Some players couldn't be mapped to IDs");
           alert("Error submitting vote: Invalid player data");
@@ -166,7 +169,7 @@ export default function VotePage({}) {
       </div>
       <div className="vote-page">
         <div className="left-side" onDrop={handleDrop} onDragOver={handleDragOver}>
-          <h2 className="top-players-header">Top 10 Items</h2>
+          <h2 className="top-players-header">Top 5 Items</h2>
           <div className="top-players-list">
             {topPlayers.length === 0 ? (
               <p>No items selected yet. Drag and drop here!</p>
