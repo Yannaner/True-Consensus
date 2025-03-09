@@ -12,8 +12,8 @@ export class UsersService {
     private usersRepository: Repository<User>,
   ) {}
 
-  async create(createUserDto: CreateUserDto): Promise<User> {
-    const user = this.usersRepository.create(createUserDto);
+  async create(createUserDto: CreateUserDto, firebaseUserId: string): Promise<User> {
+    const user = this.usersRepository.create({ ...createUserDto, user_id: firebaseUserId });
     return this.usersRepository.save(user);
   }
 
