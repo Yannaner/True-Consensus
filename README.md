@@ -14,7 +14,8 @@ TrueConsensus is crafted with a **cutting-edge, efficient tech stack**:
 - **Authentication:** Firebase  
 - **Hosting:** Vercel (frontend) & Render (backend)  
 - **Languages:** TypeScript and JavaScript  
-![image](https://github.com/user-attachments/assets/f8d47a2c-1b69-453d-b556-6651e0a47ef6)
+![ConsensusVote drawio](https://github.com/user-attachments/assets/35a583ac-cd9b-4910-8d31-5f74f16bfa0f)
+
 
 ## Challenges and Accomplishments 🏆
 One of our toughest challenges was ensuring that every authenticated user could **vote only once**, maintaining the integrity of our system. Crafting a **transparent, adaptable algorithm** demanded innovative thinking and rigorous planning. Despite these hurdles, we’re proud to have built a platform that invites **community collaboration** and empowers users to **redefine how voting should work**.
