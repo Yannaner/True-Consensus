@@ -92,13 +92,13 @@ export default function Main() {
                     <Category 
                         id={3}
                         question="What are the top 10 foods?"
-                        title="Foods"
+                        title="Food"
                         color="red"
                     />
                     <Category 
                         id={4}
                         question="What are the top 10 energy drinks?"
-                        title="Energy Drinks"
+                        title="Memes"
                         color="green"
                     />
                 </div>
