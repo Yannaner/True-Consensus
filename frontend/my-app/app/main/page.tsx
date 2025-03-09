@@ -21,6 +21,7 @@ export default function Main() {
         }
     }, [router]);
     const [votingData, setVotingData] = useState(null);
+    const [rankingData, setRankingData] = useState(null);
 
     const scrollToCategories = () => {
         categoriesRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -70,12 +71,6 @@ export default function Main() {
                         whileHover={{ scale: 1.2 }}
                     >
                         View Categories
-                    </motion.button>
-                    <motion.button 
-                        style={box} 
-                        whileHover={{ scale: 1.2 }}
-                    >
-                        Latest Rankings
                     </motion.button>
                 </div>
             </section>
