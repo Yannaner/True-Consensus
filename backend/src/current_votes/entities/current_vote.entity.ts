@@ -8,7 +8,7 @@ export class CurrentVote {
   voteId: number;
 
   @Column({ name: 'user_id' })
-  userId: number;
+  userId: string;
 
   @Column({ name: 'voting_id' })
   votingId: number;

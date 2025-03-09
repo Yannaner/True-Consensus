@@ -22,6 +22,11 @@ export class VotingElementsController {
     return this.votingElementsService.findById(+id);
   }
 
+  @Get('voting_list/:voting_id')
+  async findByVotingId(@Param('voting_id') voting_id: string) {
+    return this.votingElementsService.findByVotingId(+voting_id);
+  }
+
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateVotingElementDto: UpdateVotingElementDto) {
     return this.votingElementsService.updateById(+id, updateVotingElementDto);

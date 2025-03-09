@@ -17,6 +17,15 @@ export class UsersService {
     return this.usersRepository.save(user);
   }
 
+  async createWithId(userId: string): Promise<User> {
+    const user = this.usersRepository.create({
+      user_id: userId,
+      first_name: 'default',
+      last_name: 'default',
+    });
+    return this.usersRepository.save(user);
+  }
+
   async findAll(): Promise<User[]> {
     return this.usersRepository.find();
   }

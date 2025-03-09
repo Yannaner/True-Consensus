@@ -8,5 +8,6 @@ import { CurrentVote } from './entities/current_vote.entity';
   imports: [TypeOrmModule.forFeature([CurrentVote])],
   controllers: [CurrentVotesController],
   providers: [CurrentVotesService],
+  exports: [CurrentVotesService]
 })
 export class CurrentVotesModule {}
