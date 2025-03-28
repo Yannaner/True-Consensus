@@ -1,20 +1,9 @@
 
-<div align="center">
-
 # True-Consensus
 
-Open Source Consensus Voting with the Ranked Pairs Algorithm
+[![Last Commit](https://img.shields.io/github/last-commit/Yannaner/True-Consensus?label=Last%20Commit)](https://github.com/Yannaner/True-Consensus/commits) [![Contributors](https://img.shields.io/github/contributors/Yannaner/True-Consensus?label=Contributors)](https://github.com/Yannaner/True-Consensus/graphs/contributors) [![Issues](https://img.shields.io/github/issues/Yannaner/True-Consensus?label=Issues)](https://github.com/Yannaner/True-Consensus/issues) [![Forks](https://img.shields.io/github/forks/Yannaner/True-Consensus?label=Forks)](https://github.com/Yannaner/True-Consensus/network) [![Stars](https://img.shields.io/github/stars/Yannaner/True-Consensus?label=Stars)](https://github.com/Yannaner/True-Consensus/stargazers) [![License](https://img.shields.io/github/license/Yannaner/True-Consensus?label=License)](https://github.com/Yannaner/True-Consensus/blob/main/LICENSE) [![Build Status](https://img.shields.io/badge/build-passing-brightgreen)](https://github.com/Yannaner/True-Consensus/actions) [![Languages](https://img.shields.io/github/languages/count/Yannaner/True-Consensus?label=Languages)](https://github.com/Yannaner/True-Consensus)
 
-[![Last Commit](https://img.shields.io/github/last-commit/Yannaner/True-Consensus?label=Last%20Commit)](https://github.com/Yannaner/True-Consensus/commits)  
-[![Contributors](https://img.shields.io/github/contributors/Yannaner/True-Consensus?label=Contributors)](https://github.com/Yannaner/True-Consensus/graphs/contributors)  
-[![Issues](https://img.shields.io/github/issues/Yannaner/True-Consensus?label=Issues)](https://github.com/Yannaner/True-Consensus/issues)  
-[![Forks](https://img.shields.io/github/forks/Yannaner/True-Consensus?label=Forks)](https://github.com/Yannaner/True-Consensus/network)  
-[![Stars](https://img.shields.io/github/stars/Yannaner/True-Consensus?label=Stars)](https://github.com/Yannaner/True-Consensus/stargazers)  
-[![License](https://img.shields.io/github/license/Yannaner/True-Consensus?label=License)](https://github.com/Yannaner/True-Consensus/blob/main/LICENSE)  
-[![Build Status](https://img.shields.io/badge/build-passing-brightgreen)](https://github.com/Yannaner/True-Consensus/actions)  
-[![Languages](https://img.shields.io/github/languages/count/Yannaner/True-Consensus?label=Languages)](https://github.com/Yannaner/True-Consensus)
-
-</div>
+[![Next.js](https://img.shields.io/badge/Next.js-000000?logo=next.js&logoColor=white)](https://nextjs.org) [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-06B6D4?logo=tailwindcss&logoColor=white)](https://tailwindcss.com) [![NestJS](https://img.shields.io/badge/NestJS-E0234E?logo=nestjs&logoColor=white)](https://nestjs.com) [![TypeORM](https://img.shields.io/badge/TypeORM-2C7489?logo=typeorm&logoColor=white)](https://typeorm.io) [![PostgreSQL](https://img.shields.io/badge/PostgreSQL-336791?logo=postgresql&logoColor=white)](https://www.postgresql.org) [![Firebase](https://img.shields.io/badge/Firebase-FFCA28?logo=firebase&logoColor=black)](https://firebase.google.com) [![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org)
 
 ---
 
@@ -67,11 +56,11 @@ Traditional voting systems often suffer from opacity and bias. True-Consensus wa
 
 ## Tech Stack
 
-- **Frontend**: Next.js, Tailwind CSS
-- **Backend**: NestJS, TypeORM
-- **Database**: PostgreSQL
-- **Authentication**: Firebase
-- **Hosting**: Vercel (frontend), Render (backend)
+- **Frontend**: Next.js, Tailwind CSS  
+- **Backend**: NestJS, TypeORM  
+- **Database**: PostgreSQL  
+- **Authentication**: Firebase  
+- **Hosting**: Vercel (frontend), Render (backend)  
 - **Languages**: TypeScript, JavaScript
 
 ---
@@ -150,12 +139,10 @@ This project is licensed under the [MIT License](LICENSE).
 ---
 
 
-
 ## Acknowledgements
 
 - Thanks to the open-source community for their continuous support and feedback.
 - Special recognition to the developers behind NestJS, Next.js, and PostgreSQL.
 - Inspired by the need for transparent and fair voting systems.
-
 ```
 
